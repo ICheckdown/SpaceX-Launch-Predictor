@@ -54,7 +54,7 @@ def root():
      }
 
 
-@app.post("/predict")
+@app.post("/predict", response_model=PredictionOutput)
 def predict_launch_success(launch: LaunchInput):
 
        data = pd.DataFrame([[
@@ -80,13 +80,14 @@ def predict_launch_success(launch: LaunchInput):
        else:
             risk_level = "High"
 
-       return{
-            "prediction": "Failure" if prediction == 1 else "Success",
-            "probability_of_failure": round(probability_failure, 3),
-            "probability_of_success": round(probability_success, 3),
-            "confidence": round(confidence, 3),
-            "risk_level": risk_level
-       }
+       return PredictionOutput(  # Return as PredictionOutput object
+            prediction="Failure" if prediction == 1 else "Success",
+            probability_of_failure=round(probability_failure, 3),
+            probability_of_success=round(probability_success, 3),
+            confidence=round(confidence, 3),
+            risk_level=risk_level,
+            input_features=launch.dict()
+        )
 
 @app.get("/model-info")
 def model_info():
