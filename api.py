@@ -23,7 +23,7 @@ class LaunchInput(BaseModel):
     precipitation: float = Field(..., ge=0, description="Precipitation in mm")
     cloud_cover: float = Field(..., ge=0, le=100, description="Cloud cover percentage (0-100)")
 
-    class Config():
+    class Config:
          json_schema_extra = {
               "example" :{
                    "month" : 5,
@@ -82,8 +82,8 @@ def predict_launch_success(launch: LaunchInput):
 
        return{
             "prediction": "Failure" if prediction == 1 else "Success",
-            "probability of failure": round(probability_failure, 3),
-            "probability of success": round(probability_success, 3),
+            "probability_of_failure": round(probability_failure, 3),
+            "probability_of_success": round(probability_success, 3),
             "confidence": round(confidence, 3),
             "risk_level": risk_level
        }
@@ -100,14 +100,5 @@ def model_info():
         "data_sources": ["Launch Library 2 API", "Open-Meteo Weather API"],
         "accuracy": "87%",
         "note": "Model trained on historical data with class imbalance (141 successes, 9 failures)"
-    }
-
-@app.get("/")
-def home():
-    return {
-        "message": "SpaceX Launch Success Prediction API",
-        "endpoints": {
-            "/predict": "POST - Predict launch outcome",
-        }
     }
 
