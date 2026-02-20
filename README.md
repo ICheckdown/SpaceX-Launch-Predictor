@@ -130,3 +130,19 @@ Due to class imbalance, the model struggles to correctly classify launches that 
   }
 }
 ```
+
+## 📁 Project Structure
+```
+spacex-launch-predictor/
+├── spacex_launch_predictor.ipynb       # Data collection and Model training notebook
+├── api.py                              # FastAPI application
+├── rocket_launch_predictor.pkl         #Trained Model Saved
+├── rocket_launch_data.csv              #Scraped Data
+└── README.md                           #Project Summary  
+```
+
+## 👤 Author
+
+Pranith Sepuri
+- GitHub: [@ICheckdown](https://github.com/ICheckdown)
+- LinkedIn: [Pranith Sepuri](https://www.linkedin.com/in/pranith-sepuri/)
